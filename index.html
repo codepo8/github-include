@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub include - turn GitHub repo links into more detailed views</title>
+    <style>
+    html {
+        font-family: sans-serif;
+        background: #f8f8f8;
+        max-width: 55em;
+        margin: 0 auto;
+        font-size: 1em;
+    }
+    h1 {
+        font-size: 2em;
+        font-weight: normal;
+    }
+    h2 {
+        font-size: 1.4em;
+        color: #333;
+        font-weight: normal;
+    }
+    p {
+        font-size: 1.2em;
+    }
+    .twocol h2, .twocol h3 {
+        color: green;
+        font-size: 1em;
+        font-weight: normal;
+    }
+    .twocol {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    .twocol > div {
+        flex: 1 1 50%;
+    }
+    pre {
+        background: #ccc;
+        font-size: .85em;
+        margin-right: 1em;
+        padding: .2em;
+    }
+    dt {
+        font-weight: bold;
+    }
+    dd {
+        margin: 0 0 .4em 0;
+    }
+    </style>
+</head>
+<body>
+<h1>GitHub Include - show links to pages and latest commits</h1>
+
+<p>This is a small script that allows you to show your GitHub repos in a styled fashion showing the latest commits and a link to GitHub Pages. It is written in Vanilla JavaScript, uses the GitHub API and allorigins.win to get around the CORS issues.</p>
+<p>All you need to use it, is include the script in your page:</p>
+<pre>
+    &lt;script src="github-include.js">&lt;/script>
+</pre>
+<p>You can use plain HTML and style it yourself, or use a web component with a dark/light mode.</p>
+
+<h2>Plain HTML Demo</h2>
+<div class="twocol">
+<div>
+
+<h2>HTML Source</h2>
+<pre>
+&lt;div class="github-include" 
+     data-commits="5"
+     data-pages="🌍" 
+     data-links="true"&gt;
+  &lt;a href="https://github.com/codepo8/mastodon-share">
+  Mastodon Share
+  &lt;/a&gt;
+&lt;/div&gt;
+</pre>
+</div>
+<div>
+
+<h2>Plain HTML result (unstyled/page style)</h2>
+
+<div class="github-include" 
+     data-commits="5"
+     data-pages="🌍" 
+     data-links="true">
+  <a href="https://github.com/codepo8/mastodon-share">
+  Mastodon Share
+  </a>
+</div>
+
+</div>
+</div>
+
+<h2>Web Component Demo #1</h2>
+
+<div class="twocol">
+    <div>
+        <h3>Web Component Source #1</h3>
+        <pre>
+&lt;github-include 
+    commits="5" pages="🌍" links="true">
+    &lt;a href="https://github.com/codepo8/mastodon-share">
+      Mastodon Share
+    &lt;/a>
+&lt;/github-include>
+        </pre>
+    </div>
+    <div>
+        <h3>Web Component Result #1</h3>
+
+    <github-include commits="5" pages="🌍" links="true">
+        <a href="https://github.com/codepo8/mastodon-share">Mastodon Share</a>
+    </github-include>
+    </div>
+</div>
+
+<h2>Web Component Demo #2</h2>
+
+<div class="twocol">
+    <div>
+        <h3>Web Component Source #2</h3>
+        <pre>
+&lt;github-include 
+    commits="10" loadingmessage="fetching data" 
+    commitheader="Actions:" pages="See online">
+    &lt;a href="https://github.com/codepo8/a11y-demos">
+      Accessibility demos
+    &lt;/a>
+&lt;/github-include>                </pre>
+    </div>
+    <div>
+        <h3>Web Component Result #2</h3>
+
+    <github-include commits="10" loadingmessage="fetching data" commitheader="Actions:" pages="See online">
+        <a href="https://github.com/codepo8/a11y-demos">Accessibility demos</a>
+    </github-include>
+
+    </div>
+</div>
+
+<h2>Customisation options</h2>
+
+<h3>Attributes</h3>
+<p>Each of these attributes can be set and overridden. When using the web component, they are the names as listed. In the HTML case, you need to prepend them with `data-`</p>
+<dl>
+    <dt>commits</dt>
+    <dd>Show the last x commits to the repository, f.e. `5`, set to `-1` to show all.</dd>
+    <dt>links</dt>
+    <dd>If set to `true`, the commit messages will be links to the commits.</dd>
+    <dt>pages</dt>
+    <dd>If set to a certain text, it will create a link to the GitHub Pages of the project with the text you provide</dd>
+    <dt>commitheader</dt>
+    <dd>Text to show before the commit messages - preset is `Latest commits:`</dd>
+    <dt>loadingmessage</dt>
+    <dd>Text to show whilst loading commit messages - preset is `loading…`</dd>
+</dl>
+
+<h2>Generated HTML</h2>
+
+<p>When the script runs, it will generate the following HTML:</p>
+
+<pre>
+&lt;div class="github-include" data-commits="5" data-pages="🌍" data-links="true">
+    &lt;a href="https://github.com/codepo8/mastodon-share"
+       class="github-include-origin">
+        Mastodon Share
+    &lt;/a>
+    &lt;a class="github-include-pages" 
+    href="https://codepo8.github.io/mastodon-share/">🌍&lt;/a>
+    &lt;p class="github-include-commitheader">Latest commits: &lt;/p>
+    &lt;ul class="github-include-commits">
+        &lt;li>
+            &lt;a href="https://github … 4065">cleanup&lt;/a>
+        &lt;/li>
+        …
+    &lt;/ul>
+&lt;/div>
+</pre>
+
+
+<script src="github-include.js"></script>
+</body>
+</html>
