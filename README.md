@@ -39,6 +39,6 @@ You can customise the functionality using attributes on the component or data-at
 
 ## Demo
 
-[You can see Gihub Include in action here](https://codepo8.github.io/github-include/)
+[You can see < github-include /> in action here](https://codepo8.github.io/github-include/)
 
 
